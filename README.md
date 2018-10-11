@@ -35,6 +35,9 @@ xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 ```
 Then somewhere in your view add the control:
 ```
-<xctk:BusyIndicator IsBusy="{Binding BusyStateManager.IsBusy}"/>
+<xctk:BusyIndicator IsBusy="{Binding BusyStateManager.IsBusy}">
+    <!-- your content here -->
+</xctk:BusyIndicator>
 ```
+
 Or similar control of your choice.
