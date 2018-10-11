@@ -29,3 +29,12 @@ private void OnAuthenticated(AuthenticatedMessage m)
     MessengerInstance.Send(new BusyMessage(false, this));
 }
 ```
+After this one can add a `BusyIndicator`, to your view, like the following. First in the header:
+```
+xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+```
+Then somewhere in your view:
+```
+<xctk:BusyIndicator IsBusy="{Binding BusyStateManager.IsBusy}">
+```
+Or similar control of your choice.
