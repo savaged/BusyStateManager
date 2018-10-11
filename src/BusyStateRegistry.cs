@@ -15,19 +15,29 @@ namespace Savaged.BusyStateManager
     /// unregister once complete, then the busy value is only set to 
     /// true once the register is empty.
     /// </summary>
-    public class BusyStateRegistry : ObservableObject
+    public class BusyStateRegistry : ObservableObject, IBusyStateRegistry
     {
         private IList<string> _registry;
 
-        public BusyStateRegistry()
+        public BusyStateRegistry(IMessenger messenger = null)
         {
             _registry = new List<string>();
-            Messenger.Default.Register<BusyMessage>(this, OnBusyMessage);
+            if (messenger != null)
+            {
+                MessengerInstance = messenger;
+            }
+            else
+            {
+                MessengerInstance = Messenger.Default;
+            }
+            MessengerInstance.Register<BusyMessage>(this, OnBusyMessage);
         }
+
+        public IMessenger MessengerInstance { get; }
 
         public bool IsBusy => _registry.Count > 0;
 
-        private void OnBusyMessage(BusyMessage m)
+        private void OnBusyMessage(IBusyMessage m)
         {
             if (m.IsBusy)
             {
@@ -38,6 +48,21 @@ namespace Savaged.BusyStateManager
                 _registry.Remove($"{m.CallerType}.{m.CallerMember}");
             }
             RaisePropertyChanged(nameof(IsBusy));
+        }
+
+        /// <summary>
+        /// For diagnostics
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            var registry = "Registry: [";
+            foreach (var caller in _registry)
+            {
+                registry += "{ caller: " + caller + " },";
+            }
+            registry += $"]";
+            return registry;
         }
     }
 }

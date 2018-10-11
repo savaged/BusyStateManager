@@ -17,7 +17,7 @@ namespace Savaged.BusyStateManager
     /// MessengerInstance.Send(new BusyMessage(false, this));
     /// </code>
     /// </example>
-    public class BusyMessage : MessageBase
+    public class BusyMessage : MessageBase, IBusyMessage
     {
         /// <summary>
         /// ctor
