@@ -19,19 +19,22 @@ SimpleIoc.Default.Register<IBusyStateRegistry>(() =>
 Then in a view model that inherits from the Mvvm-Light `ViewModelBase`, at the start and end of long running process add:
 `MessengerInstance.Send(new BusyMessage(true, this));` and `MessengerInstance.Send(new BusyMessage(false, this));`. For example:
 ```
-MessengerInstance.Send(new BusyMessage(true, this));
-try
+private void OnNavToMatch(MatchWrapper selectedItem)
 {
-    // Your long running process
-}
-catch (Exception ex)
-{
-    // Do something about the error
-    throw;
-}
-finally
-{
-    MessengerInstance.Send(new BusyMessage(false, this));
+    MessengerInstance.Send(new BusyMessage(true, this));
+    try
+    {
+        // Your long running process
+    }
+    catch (Exception)
+    {
+        // Do something about the error
+        throw;
+    }
+    finally
+    {
+        MessengerInstance.Send(new BusyMessage(false, this));
+    }
 }
 ```
 Add a public property in your view model like this: `public IBusyStateRegistry BusyStateManager { get; }`, which you would set in the constructor. After that one can add a `BusyIndicator`, to any view, like the following. First, the Xceed tool ref in the header (if it's not already present):
