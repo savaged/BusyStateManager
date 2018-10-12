@@ -19,13 +19,18 @@ SimpleIoc.Default.Register<IBusyStateRegistry>(() =>
 Then in a view model that inherits from the Mvvm-Light `ViewModelBase`, at the start and end of long running process add:
 `MessengerInstance.Send(new BusyMessage(true, this));` and `MessengerInstance.Send(new BusyMessage(false, this));`. For example:
 ```
-private void OnAuthenticated(AuthenticatedMessage m)
+MessengerInstance.Send(new BusyMessage(true, this));
+try
 {
-    MessengerInstance.Send(new BusyMessage(true, this));
-    User.Current.Initialise(m.Token);
-    RaisePropertyChanged(nameof(IsLoggedIn));
-    _navigationService.NavigateTo(
-        HamburgerNavItemsIndex.Requirement.ToString());
+    // Your long running process
+}
+catch (Exception ex)
+{
+    // Do something about the error
+    throw;
+}
+finally
+{
     MessengerInstance.Send(new BusyMessage(false, this));
 }
 ```
