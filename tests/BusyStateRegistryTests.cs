@@ -1,8 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Savaged.BusyStateManager.Test
 {
@@ -64,6 +61,9 @@ namespace Savaged.BusyStateManager.Test
         {
             var main = SimpleIoc.Default.GetInstance<TestMainViewModel>();
             var sub = SimpleIoc.Default.GetInstance<TestSubViewModel>();
+
+            Assert.IsNotNull(main);
+            Assert.IsNotNull(sub);
 
             main.SimulateLongProcess(true);
             sub.SimulateLongProcess(true);

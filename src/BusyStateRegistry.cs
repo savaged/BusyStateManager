@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -19,18 +20,23 @@ namespace Savaged.BusyStateManager
     {
         private IList<string> _registry;
 
-        public BusyStateRegistry(IMessenger messenger = null)
+        public BusyStateRegistry()
         {
             _registry = new List<string>();
-            if (messenger != null)
-            {
-                MessengerInstance = messenger;
-            }
-            else
+
+            if (MessengerInstance is null)
             {
                 MessengerInstance = Messenger.Default;
             }
             MessengerInstance.Register<BusyMessage>(this, OnBusyMessage);
+        }
+
+        public BusyStateRegistry(IMessenger messenger) : this()
+        {
+            if (messenger != null)
+            {
+                MessengerInstance = messenger;
+            }
         }
 
         public IMessenger MessengerInstance { get; }
@@ -39,6 +45,10 @@ namespace Savaged.BusyStateManager
 
         private void OnBusyMessage(IBusyMessage m)
         {
+            if (m is null)
+            {
+                throw new ArgumentException("The message object should never be null", "m");
+            }
             if (m.IsBusy)
             {
                 _registry.Add($"{m.CallerType}.{m.CallerMember}");
