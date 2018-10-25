@@ -37,7 +37,7 @@ private void OnNavToMatch(MatchWrapper selectedItem)
     }
 }
 ```
-It might be handy to add the above code as a [snippet](https://docs.microsoft.com/en-us/visualstudio/ide/code-snippets?view=vs-2017) like the one in this project - [Busy.snippet].
+It might be handy to add the above code as a [snippet](https://docs.microsoft.com/en-us/visualstudio/ide/code-snippets?view=vs-2017) like the one in this project - [Busy.snippet](Busy.snippet).
 
 Add a public property in your view model like this: `public IBusyStateRegistry BusyStateManager { get; }`, which you would set in the constructor. After that one can add a `BusyIndicator`, to any view, like the following. First, the Xceed tool ref in the header (if it's not already present):
 ```
