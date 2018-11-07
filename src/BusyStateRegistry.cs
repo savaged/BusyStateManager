@@ -18,28 +18,32 @@ namespace Savaged.BusyStateManager
     /// </summary>
     public class BusyStateRegistry : ObservableObject, IBusyStateRegistry
     {
-        private IList<string> _registry;
+        private readonly IList<string> _registry;
+        private readonly IMessenger _messengerInstance;
 
         public BusyStateRegistry()
         {
             _registry = new List<string>();
 
-            if (MessengerInstance is null)
+            if (_messengerInstance is null)
             {
-                MessengerInstance = Messenger.Default;
+                _messengerInstance = Messenger.Default;
             }
-            MessengerInstance.Register<BusyMessage>(this, OnBusyMessage);
+            _messengerInstance.Register<BusyMessage>(this, OnBusyMessage);
         }
 
         public BusyStateRegistry(IMessenger messenger) : this()
         {
             if (messenger != null)
             {
-                MessengerInstance = messenger;
+                _messengerInstance = messenger;
             }
         }
 
-        public IMessenger MessengerInstance { get; }
+        public IMessenger GetMessengerInstance()
+        {
+            return _messengerInstance;
+        }
 
         public bool IsBusy => _registry.Count > 0;
 
@@ -47,7 +51,8 @@ namespace Savaged.BusyStateManager
         {
             if (m is null)
             {
-                throw new ArgumentException("The message object should never be null", "m");
+                throw new ArgumentException(
+                    "The message object should never be null", "m");
             }
             if (m.IsBusy)
             {
@@ -61,7 +66,7 @@ namespace Savaged.BusyStateManager
         }
 
         /// <summary>
-        /// For diagnostics
+        /// For diagnostics this will dump the registry as json
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -69,9 +74,9 @@ namespace Savaged.BusyStateManager
             var registry = "Registry: [";
             foreach (var caller in _registry)
             {
-                registry += "{ caller: " + caller + " },";
+                registry += "{ caller: \"" + caller + "\" },";
             }
-            registry += $"]";
+            registry += "]";
             return registry;
         }
     }

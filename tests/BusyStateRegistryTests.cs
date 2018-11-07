@@ -24,7 +24,7 @@ namespace Savaged.BusyStateManager.Test
             Assert.IsNotNull(mngr);
             var main = SimpleIoc.Default.GetInstance<TestMainViewModel>();
             Assert.IsNotNull(main);
-            Assert.AreEqual(mngr.MessengerInstance, main.GetMessengerInstance());
+            Assert.AreEqual(mngr.GetMessengerInstance(), main.GetMessengerInstance());
         }
 
         [TestMethod]
@@ -57,6 +57,18 @@ namespace Savaged.BusyStateManager.Test
         }
 
         [TestMethod]
+        public void WrappedBusyManagerIsBusyNotificationTest()
+        {
+            var mngr = SimpleIoc.Default.GetInstance<IBusyStateRegistry>();
+            var vm = new ViewModelUsingWrappedBusyMngr(new BusyMgnrWrapper(mngr));
+            Assert.IsFalse(vm.ViewState.IsBusy, "Wrapped busy mngr not busy before long process");
+            vm.SimulateLongProcess(true);
+            Assert.IsTrue(vm.ViewState.IsBusy, "Wrapped busy mngr is busy during long process");
+            vm.SimulateLongProcess(false);
+            Assert.IsFalse(vm.ViewState.IsBusy, "Wrapped busy mngr not busy after long process");
+        }
+
+        [TestMethod]
         public void DiagnosticsOutputTest()
         {
             var main = SimpleIoc.Default.GetInstance<TestMainViewModel>();
@@ -68,9 +80,9 @@ namespace Savaged.BusyStateManager.Test
             main.SimulateLongProcess(true);
             sub.SimulateLongProcess(true);
             Assert.AreEqual(
-                "Registry: [{ caller: Savaged.BusyStateManager.Test.TestMainViewModel" +
-                ".SimulateLongProcess },{ caller: Savaged.BusyStateManager.Test." +
-                "TestSubViewModel.SimulateLongProcess },]", main.BusyStateRegistry.ToString());
+                "Registry: [{ caller: \"Savaged.BusyStateManager.Test.TestMainViewModel" +
+                ".SimulateLongProcess\" },{ caller: \"Savaged.BusyStateManager.Test." +
+                "TestSubViewModel.SimulateLongProcess\" },]", main.BusyStateRegistry.ToString());
         }
     }
 }

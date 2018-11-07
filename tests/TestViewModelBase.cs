@@ -12,7 +12,7 @@ namespace Savaged.BusyStateManager.Test
 
         public IMessenger GetMessengerInstance() => MessengerInstance;
 
-        public bool IsBusy => BusyStateRegistry.IsBusy;
+        public virtual bool IsBusy => BusyStateRegistry.IsBusy;
 
         public IBusyStateRegistry BusyStateRegistry { get; }
 

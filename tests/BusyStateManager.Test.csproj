@@ -73,6 +73,8 @@
     <Compile Include="TestSubViewModel.cs" />
     <Compile Include="TestMainViewModel.cs" />
     <Compile Include="TestViewModelBase.cs" />
+    <Compile Include="ViewModelUsingWrappedBusyMngr.cs" />
+    <Compile Include="BusyMgnrWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

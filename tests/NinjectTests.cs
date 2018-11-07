@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 
 namespace Savaged.BusyStateManager.Test
@@ -23,7 +22,7 @@ namespace Savaged.BusyStateManager.Test
             var mngr = _kernel.Get<IBusyStateRegistry>();
             var main = _kernel.Get<TestMainViewModel>();
             Assert.IsNotNull(main);
-            Assert.AreEqual(mngr.MessengerInstance, main.GetMessengerInstance());
+            Assert.AreEqual(mngr.GetMessengerInstance(), main.GetMessengerInstance());
         }
     }
 }
