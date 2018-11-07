@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+          <Title>BusyStateManager Snippet</Title>
+          <Author>savaged</Author>
+          <Shortcut>busy</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp" Kind="method body">
+              <![CDATA[MessengerInstance.Send(new BusyMessage(true, this));
+    try
+    {
+        // Your long running process
+    }
+    catch (Exception)
+    {
+        // Do something about the error
+        throw;
+    }
+    finally
+    {
+        MessengerInstance.Send(new BusyMessage(false, this));
+    }]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
