@@ -6,7 +6,7 @@ A .Net Framework library, for use in WPF, for controlling the 'Busy' state grace
 
 ### Download
 Available to clone and add as a project reference or via NuGet.
-`Install-Package BusyStateManager -Version 1.0.1` or `dotnet add package BusyStateManager --version 1.0.1`
+`Install-Package BusyStateManager -Version 1.1.0` or `dotnet add package BusyStateManager --version 1.1.0`
 
 ### In Code
 As this library is aimed at WPF developers, the following is the likely route for instatiation. This uses Mvvm-Light SimpleIoC, however you can of course use your DI of choice or even create an instance without DI.
@@ -54,4 +54,4 @@ Or similar control of your choice.
 
 ## Roadmap
 
-* Aiming to have .Net Framework and .Net Standard versions
+* Aiming to have both a .Net Framework and a .Net Standard version
