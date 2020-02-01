@@ -2,11 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>BusyStateManagerStd</PackageId>
+    <Version>2.0.1</Version>
+    <Authors>David Savage</Authors>
+    <Company>savaged.info</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Title>BusyStateManagerStd</Title>
+    <Description>A .Net Standard 2.*: Busy State Manager</Description>
+    <Summary>A .Net Core library, for use in WPF, for controlling the 'Busy' state gracefully</Summary>
+    <ReleaseNotes>A .Net Standard 2.* version (otherwise exactly the same as the BusyStateManager .Net Framework version</ReleaseNotes>
+    <ProjectURL>https://github.com/savaged/BusyStateManager</ProjectURL>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryURL>https://github.com/savaged/BusyStateManager</RepositoryURL>
+    <Copyright>Copyright (C) 2007 Free Software Foundation, Inc.</Copyright>
+    <Tags>WPF MVVM</Tags>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Ninject" Version="3.3.4" />
+    <None Include="../../LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>
