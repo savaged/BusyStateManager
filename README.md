@@ -57,7 +57,3 @@ Then somewhere in your view add the control:
 ```
 
 Or similar control of your choice.
-
-## Roadmap
-
-* Aiming to have both a .Net Framework and a .Net Standard version
