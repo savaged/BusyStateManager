@@ -8,5 +8,7 @@ namespace Savaged.BusyStateManager
         bool IsBusy { get; }
 
         IMessenger GetMessengerInstance();
+
+        event PropertyChangedEventHandler PropertyChanged;
     }
 }

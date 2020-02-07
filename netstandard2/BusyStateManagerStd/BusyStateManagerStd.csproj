@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>BusyStateManagerStd</PackageId>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <Authors>David Savage</Authors>
     <Company>savaged.info</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
